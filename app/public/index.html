@@ -1,0 +1,50 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>FermiParadox</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link href="//www.google-analytics.com" rel="dns-prefetch">
+    <link href="//ajax.googleapis.com" rel="dns-prefetch">
+    <link href="assets/css/style.min.css" rel="stylesheet">
+
+    <script src="assets/components/jquery/jquery.min.js"></script>
+    <script src="assets/components/qrcode/qrcode.min.js"></script>
+    <script src="assets/components/Phaser/phaser.min.js"></script>
+    <script src="assets/components/Phaser/pixi.min.js"></script>
+    <script src="assets/components/Phaser/phaser-no-libs.min.js"></script>
+    <script src="assets/components/Phaser/phaser-no-physics.min.js"></script>
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+
+  </head>
+  <body>
+    <div id="container">
+      <div id="connect">
+        <div id="buttonContainer" class="hide">
+          <button id="hostGame" class="button">Host Game</button>
+          <button id="joinGame" class="button">Join game</button>
+        </div>
+        <div id="qrcodeContainer" class="hide">
+          <div id="qrcode"></div> or use game id: <span id="gameId"></span>
+          </br>
+           Waiting for players... (<span id="playersCount">1</span>/2)
+        </div>
+        <div id="formContainer" class="hide">
+          <input type="text" id="inputGameId" class="button" value="Game Id">
+          <button id="joinGameId" class="button">Join this game</button>
+        </div>
+        <div id="endContainer" class="hide">
+          <button id="restartGame" class="button">Play again</button>
+        </div>
+      </div>
+      <div id="game"></div>
+    </div>
+
+    <script src="assets/js/game.min.js"></script>
+    <script src="assets/js/form.min.js"></script>
+  </body>
+</html>

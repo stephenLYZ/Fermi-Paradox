@@ -14,7 +14,7 @@
 
 html {
   font-size: 62.5%;
-  background: radial-gradient(ellipse at center, #F7F6F0 0, #c2ba8c 80%, #b0a66b 100%); }
+  background: #F7F6F0; }
 
 body {
   font: 300 13px/1.6 'Helvetica Neue', Helvetica, Arial;
@@ -380,15 +380,6 @@ td,
 th {
   padding: 0; }
 
-.logo {
-  margin: -58px 0 0 -100px;
-  position: absolute;
-  top: 50%;
-  left: 50%; }
-
-.nav ul {
-  list-style: none; }
-
 @font-face {
   font-family: 'Font-Name';
   src: url("../fonts/font-name.eot");
@@ -396,61 +387,5 @@ th {
   font-weight: normal;
   font-style: normal; }
 
-::-moz-selection {
-  background: #333;
-  color: #fff;
-  text-shadow: none; }
-
-::selection {
-  background: #333;
-  color: #fff;
-  text-shadow: none; }
-
-::-moz-selection {
-  background: #333;
-  color: #fff;
-  text-shadow: none; }
-
-::-webkit-selection {
-  background: #333;
-  color: #fff;
-  text-shadow: none; }
-
-@media print {
-  * {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important; }
-  a,
-  a:visited {
-    text-decoration: underline; }
-  a[href]:after {
-    content: " (" attr(href) ")"; }
-  abbr[title]:after {
-    content: " (" attr(title) ")"; }
-  .ir a:after,
-  a[href^="javascript:"]:after,
-  a[href^="#"]:after {
-    content: ""; }
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid; }
-  thead {
-    display: table-header-group; }
-  tr,
-  img {
-    page-break-inside: avoid; }
-  img {
-    max-width: 100% !important; }
-  @page {
-    margin: 0.5cm; }
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3; }
-  h2,
-  h3 {
-    page-break-after: avoid; } }
+.hide {
+  display: none; }
