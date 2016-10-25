@@ -21,7 +21,7 @@ $(function() {
             if ($playersCount.length > 0) {
                 $playersCount.text(data.playersCount);
             }
-            if (data.playersCount == 4) {
+            if (data.playersCount == 2) {
                 $("#connect").addClass("hide");
                 pong.sync({ hosting: true, playersCount: data.playersCount });
             }
@@ -32,7 +32,7 @@ $(function() {
             if ($playersCount.length > 0) {
                 $playersCount.text(data.playersCount);
             }
-            if (data.playersCount == 4) {
+            if (data.playersCount == 2) {
                 $("#connect").addClass("hide");
                 pong.sync({ hosting: true, playersCount: data.playersCount });
             }

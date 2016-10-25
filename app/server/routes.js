@@ -1,8 +1,9 @@
-var express = require('express')
-var router = express.Router()
+var express = require('express');
+var router = express.Router();
 
-router.get('/',function(req,res,next){
-  res.render('index',{ title: 'Fermi_paradox' })
-})
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Pong' });
+});
 
-module.exports = router
+module.exports = router;
