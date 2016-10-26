@@ -3,6 +3,7 @@ function server(io) {
     var timeOutDelay = 2500;
     var maxPlayers = 2;
 
+
     var clientPlayers = {};
     var clients = {};
     var hosts = {};
@@ -218,11 +219,11 @@ function server(io) {
                     var newSocketId = players[Math.floor(Math.random()*players.length)];
                     hosts[newSocketId] = true;
 
-                    //sendError(6, "host left the game", socket, room);
-                    getSocket(newSocketId).emit('becomeHost');
+                    sendError(6, "host left the game", socket, room);
+                    // getSocket(newSocketId).emit('becomeHost');
                 }
                 else if (players.length == 1) {
-                    sendError(8, "the other players left the game!", socket, room);
+                    sendError(8, "all the other players left the game!", socket, room);
                 }
             }
             else {
