@@ -1,65 +1,114 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    browserSync = require('browser-sync'),
-    autoprefixer = require('gulp-autoprefixer'),
-    uglify = require('gulp-uglify'),
-    jshint = require('gulp-jshint'),
-    header  = require('gulp-header'),
-    rename = require('gulp-rename'),
-    cssnano = require('gulp-cssnano'),
-    package = require('./package.json');
+var
+  gulp = require('gulp'),
+  gladius = require('gladius-forge'),
+  server = require('./app');
 
 
-var banner = [
-  '/*!\n' +
-  ' * <%= package.name %>\n' +
-  ' * <%= package.title %>\n' +
-  ' * <%= package.url %>\n' +
-  ' * @author <%= package.author %>\n' +
-  ' * @version <%= package.version %>\n' +
-  ' * Copyright ' + new Date().getFullYear() + '. <%= package.license %> licensed.\n' +
-  ' */',
-  '\n'
-].join('');
+gladius.config(gulp, {
+  modules: {
+    // module to use to preprocess your stylesheets. default: less
+    // possible values: less, sass, sassCompass, stylus, myth.
+    styles: 'less'
+  },
+  paths: {
+    src: {
+      // folder home of your source files (less, js, etc). default: src/
+      base: '',
 
-gulp.task('css', function () {
-    return gulp.src('src/scss/style.scss')
-    .pipe(sass({errLogToConsole: true}))
-    .pipe(autoprefixer('last 4 version'))
-    .pipe(gulp.dest('app/public/assets/css'))
-    .pipe(cssnano())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(header(banner, { package : package }))
-    .pipe(gulp.dest('app/public/assets/css'))
-    .pipe(browserSync.reload({stream:true}));
+      // styles sources folder. default: styles/
+      styles: 'less/',
+
+      // scripts folder. default: scripts/
+      scripts: '',
+
+      esnextExtension: '.es6.js',
+
+      // templates and partials folder: default: ../views/, partials/
+      templates: '',
+      partials: '',
+
+    },
+
+    out: {
+      // folder destination for built bundles. default: public/
+      base: '',
+
+      // production ready styles folder. default: css/
+      styles: '',
+
+      // production ready scripts folder. default: js/
+      scripts: ''
+    }
+  },
+  // express web server to use while developing.
+  // port default: 3000
+  // liveReloadPort default: 35729
+  server: server,
+  port: null,
+  liveReloadPort: null
 });
 
-gulp.task('js',function(){
-  gulp.src('src/js/*.js')
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('default'))
-    .pipe(header(banner, { package : package }))
-    .pipe(gulp.dest('app/public/assets/js'))
-    .pipe(uglify())
-    .pipe(header(banner, { package : package }))
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(gulp.dest('app/public/assets/js'))
-    .pipe(browserSync.reload({stream:true, once: true}));
+
+
+
+/**
+ * Here you can hook extra tasks as dependency for predefined tasks (insert
+ * a leading '!' to remove dependencies) or add additional sources (insert a
+ * leading '!' to the path to delcare sources which should be ignored).
+ * ------------------------------------------------------------------------- */
+gladius.setupTasks({
+  'bundle-js': {
+    deps: [],
+    src: []
+  },
+  'bundle-js:dev': {
+    deps: [],
+    src: []
+  },
+  'lint': {
+    deps: [],
+    src: [
+      '!src/scripts/vendor/**/*',
+      '!src/scripts/mock/lib/**/*'
+    ]
+  }
 });
 
-gulp.task('browser-sync', function() {
-    browserSync.init(null, {
-        server: {
-            baseDir: "app"
-        }
-    });
-});
-gulp.task('bs-reload', function () {
-    browserSync.reload();
+
+/**
+ * Add extra gulp tasks below
+ * ------------------------------------------------------------------------- */
+var $ = gladius.getPlugins();
+
+// Check the Meesayen/es6-boilerplate repository on github for a sample usage.
+
+/* Handlebars helpers bundling --------------------------------------------- */
+gulp.task('publish-helpers', function() {
+  return gulp.src(['handlebars.helpers.js'])
+  .pipe($.uglify())
+  .pipe(gulp.dest('public/js/'));
 });
 
-gulp.task('default', ['css', 'js', 'browser-sync'], function () {
-    gulp.watch("src/scss/*/*.scss", ['css']);
-    gulp.watch("src/js/*.js", ['js']);
-    gulp.watch("app/public/*.html", ['bs-reload']);
+
+/**
+ * Here you plug additional watchers to gulp.
+ * ------------------------------------------------------------------------- */
+gladius.setupWatchers(function(gulp) {
+  gulp.watch('handlebars.helpers.js', ['publish-helpers']);
+});
+
+
+
+/**
+ * Here you can inject extra tasks into the main tasks. Those will be appendend
+ * and concurrently run with other tasks.
+ * ------------------------------------------------------------------------- */
+gladius.setupMain({
+  'development': [
+    'publish-helpers'
+  ],
+  'test': [],
+  'production': [
+    'publish-helpers'
+  ]
 });
