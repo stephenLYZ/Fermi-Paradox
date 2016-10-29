@@ -1,7 +1,7 @@
 {{#block "header"}}
   <!doctype html>
 
-  <title>{{content.title}}</title>
+  <title>Fermi Paradox</title>
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,18 +13,26 @@
 {{/block}}
 
 {{#block "footer"}}
-  {{> vendorscripts}}
+  <!-- {{> vendorscripts}} -->
 
 
-
+  {{!-- Lib Scripts --}}
+  <script type="text/javascript" src="/js/reqwest.js"></script>
+  <script type="text/javascript" src="/js/handlebars.js"></script>
+  <script type="text/javascript" src="/js/es5-shim.js"></script>
+  <script type="text/javascript" src="/js/yapl.js"></script>
+  <script type="text/javascript" src="/js/handlebars.runtime.js"></script>
+  <script type="text/javascript" src="/js/regenerator.min.js"></script>
+  <script type="text/javascript" src="/js/socket.io.js"></script>
 
   {{!-- Core Scripts --}}
   <script type="text/javascript" src="/js/handlebars.helpers.js"></script>
   <script type="text/javascript" src="/js/templates.js"></script>
   <script type="text/javascript" src="/js/core.js"></script>
 
+
   {{!-- App Script --}}
-  <script type="text/javascript" src="/js/{{appScript}}"></script>
+  <script type="text/javascript" src="/js/index.js"></script>
 
 
 {{/block}}

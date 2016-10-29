@@ -76,9 +76,9 @@ export class Pong {
 
   config() {
     //canvas
-    _ctx.strokeStyle = '#ffffff';
+    _ctx.strokeStyle = '#000000';
     //actors
-    this.actor.fillStyle = '#ffffff';
+    this.actor.fillStyle = '#000000';
     this.actor.halfHeight = this.actor.height / 2;
     this.actor.halfWidth = this.actor.width / 2;
     // reset time
@@ -334,4 +334,3 @@ export class Pong {
   }
 
 }
-

@@ -14,19 +14,11 @@ this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/index"] = 
 this["R"] = this["R"] || {};
 this["R"]["templates"] = this["R"]["templates"] || {};
 this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/mainlayout"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
-  return "<!doctype html><title>"
-    + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.content : depth0)) != null ? stack1.title : stack1), depth0))
-    + "</title><meta charset=\"utf-8\"><meta name=\"description\" content=\"\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/main.css\">";
-},"3":function(depth0,helpers,partials,data) {
+  return "<!doctype html><title>Fermi Paradox</title><meta charset=\"utf-8\"><meta name=\"description\" content=\"\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link rel=\"stylesheet\" type=\"text/css\" href=\"/css/main.css\">";
+  },"3":function(depth0,helpers,partials,data) {
   return " ";
   },"5":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = " ";
-  stack1 = this.invokePartial(partials.vendorscripts, '', 'vendorscripts', depth0, undefined, helpers, partials, data);
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + " <script type=\"text/javascript\" src=\"/js/handlebars.helpers.js\"></script><script type=\"text/javascript\" src=\"/js/templates.js\"></script><script type=\"text/javascript\" src=\"/js/core.js\"></script><script type=\"text/javascript\" src=\"/js/"
-    + escapeExpression(((helper = (helper = helpers.appScript || (depth0 != null ? depth0.appScript : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"appScript","hash":{},"data":data}) : helper)))
-    + "\"></script>";
+  return "<script type=\"text/javascript\" src=\"/js/reqwest.js\"></script><script type=\"text/javascript\" src=\"/js/handlebars.js\"></script><script type=\"text/javascript\" src=\"/js/es5-shim.js\"></script><script type=\"text/javascript\" src=\"/js/yapl.js\"></script><script type=\"text/javascript\" src=\"/js/handlebars.runtime.js\"></script><script type=\"text/javascript\" src=\"/js/regenerator.min.js\"></script><script type=\"text/javascript\" src=\"/js/socket.io.js\"></script><script type=\"text/javascript\" src=\"/js/handlebars.helpers.js\"></script><script type=\"text/javascript\" src=\"/js/templates.js\"></script><script type=\"text/javascript\" src=\"/js/core.js\"></script><script type=\"text/javascript\" src=\"/js/index.js\"></script>";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helperMissing=helpers.helperMissing, buffer = "";
   stack1 = ((helpers.block || (depth0 && depth0.block) || helperMissing).call(depth0, "header", {"name":"block","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}));
@@ -38,7 +30,7 @@ this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/mainlayout
   stack1 = ((helpers.block || (depth0 && depth0.block) || helperMissing).call(depth0, "footer", {"name":"block","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data}));
   if (stack1 != null) { buffer += stack1; }
   return buffer;
-},"usePartial":true,"useData":true});;
+},"useData":true});;
 this["R"] = this["R"] || {};
 this["R"]["templates"] = this["R"]["templates"] || {};
 this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/vendorscripts"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
@@ -58,19 +50,3 @@ this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/vendorscri
   if (stack1 != null) { return stack1; }
   else { return ''; }
   },"useData":true});;
-this["R"] = this["R"] || {};
-this["R"]["templates"] = this["R"]["templates"] || {};
-this["R"]["templates"]["/Users/stephenliu/Desktop/fermi_paradox/views/partials/bookingform"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "<li>"
-    + escapeExpression(((helper = (helper = helpers.label || (depth0 != null ? depth0.label : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"label","hash":{},"data":data}) : helper)))
-    + "</li>";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing, buffer = "<div class=\"booking-form\"><div><p>Booking Form goes here</p></div><h2>"
-    + escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))
-    + "</h2><ul>";
-  stack1 = ((helper = (helper = helpers.items || (depth0 != null ? depth0.items : depth0)) != null ? helper : helperMissing),(options={"name":"items","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
-  if (!helpers.items) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "</ul></div>";
-},"useData":true});;
