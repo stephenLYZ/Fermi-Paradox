@@ -1,5 +1,5 @@
-import { Ball } from '../elements/ball.es6';
-import { Actor } from '../elements/actor.es6';
+import { Ball } from '../elements/ball';
+import { Actor } from '../elements/actor';
 
 var
   win = window,
@@ -29,12 +29,12 @@ export class Pong {
     _io = io;
     _ctx = ctx;
     this.pitch = sessionStorage.getItem('player');
-    this.scoreEl = doc.querySelector('#score');
-    if (this.pitch === 'right') {
-      this.scoreEl.classList.add('right');
-    }
-    // resize actor propotions for smaller screen
-    this.actor = new Actor(10, 10, 20, 120, _ctx, _ctx.canvas.height,
+    // this.scoreEl = doc.querySelector('#score');
+    // if (this.pitch === 'right') {
+    //   this.scoreEl.classList.add('right');
+    // }
+
+    this.actor = new Actor(10, 10, 15, 90, _ctx, _ctx.canvas.height,
       _ctx.canvas.width, this.pitch);
     this.ball = new Ball(300, 300, _ctx,
     win.innerWidth, win.innerHeight, this.pitch);
@@ -44,6 +44,7 @@ export class Pong {
     _io.on('pong:goal-scored', this.goalHandler.bind(this));
     _io.on('pong:player-left', this.playerLeft.bind(this));
     _io.on('pong:ball-coming', this.ballComingHandler.bind(this));
+
     this.scribbles = {
       actors: this.actor,
       ball: this.ball
@@ -75,10 +76,9 @@ export class Pong {
   }
 
   config() {
-    //canvas
-    _ctx.strokeStyle = '#000000';
+    this.ball.fillStyle = '#3a0b5b';
     //actors
-    this.actor.fillStyle = '#000000';
+    this.actor.fillStyle = '#ffff00';
     this.actor.halfHeight = this.actor.height / 2;
     this.actor.halfWidth = this.actor.width / 2;
     // reset time
@@ -87,17 +87,17 @@ export class Pong {
     this.ball.x_speed = 10;
     this.ball.y_speed = 10;
     this.ball.radius = 10;
-    this.ball.fillstyle = '#000000';
+
     if (this.pitch === 'right') {
       this.ball.invisible = false;
     }else{
       this.ball.invisible = true;
     }
-    //score
-    this.score = {
-      player1: 0,
-      player2: 0
-    };
+    // //score
+    // this.score = {
+    //   player1: 0,
+    //   player2: 0
+    // };
   }
 
 
@@ -130,10 +130,10 @@ export class Pong {
     this.ball.updateOnResize(_ctx.canvas.width, _ctx.canvas.height);
     if (_ctx.canvas.height > _ctx.canvas.width) {
       this.dirPlayer = 'x';
-      this.scoreEl.classList.add('portrait');
+      // this.scoreEl.classList.add('portrait');
     } else {
       this.dirPlayer = 'y';
-      this.scoreEl.classList.remove('portrait');
+      // this.scoreEl.classList.remove('portrait');
     }
     if(init){
       this.orientation();
@@ -186,26 +186,29 @@ export class Pong {
   }
 
   goal() {
-    ++this.score.player2;
+    this.loseUpdate();
     _io.emit('pong:goal');
-    this.scoreUpdate();
+
   }
 
   goalHandler() {
-    ++this.score.player1;
-    this.scoreUpdate();
+    this.winUpdate();
   }
 
-  scoreUpdate(){
-      this.scoreEl.textContent = `${this.score.player1} - ${this.score.player2}`;
+  loseUpdate(){
+      doc.querySelector('.lose').classList.remove('hidden');
       this.ball.reset(_ctx.canvas.width, _ctx.canvas.height);
-      this.scoreEl.classList.toggle('goal');
-      setTimeout(function(){
-        this.scoreEl.classList.toggle('goal');
-      }.bind(this), 400 );
+      doc.querySelector('.cancel').addEventListener('touchstart',function(e){
+        doc.querySelector('.lose').classList.add('hidden').bind(this);
+      });
   }
-
-
+  winUpdate(){
+      doc.querySelector('.win').classList.remove('hidden');
+      this.ball.reset(_ctx.canvas.width, _ctx.canvas.height);
+      doc.querySelector('.cancel').addEventListener('touchstart',function(e){
+        doc.querySelector('.win').classList.add('hidden').bind(this);
+      });
+  }
   update() {
      if (this.dirPlayer === 'y' && this.pitch === 'left') {
       if (this.ball.x - this.ball.radius <= 0) {
@@ -299,7 +302,7 @@ export class Pong {
           this.actor.width && this.ball.y >= this.actor.coords.y &&
           this.ball.y <= this.actor.height + this.actor.coords.y) {
         return {collision: 'collisionX', actorCoords : this.actor.coords.x +
-        this.actor.width + this.ball.radius};
+        this.actor.width };
       } else {
         return false;
       }
@@ -332,5 +335,6 @@ export class Pong {
         }
     }
   }
+
 
 }

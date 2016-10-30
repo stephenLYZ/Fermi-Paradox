@@ -14,13 +14,15 @@ export class Lobby {
 	hide() {
 		doc.querySelector('.lobby').classList.add('hidden');
 	}
-
+	// appear(){
+	// 	doc.querySelector('.score').classList.remove('hidden');
+	// }
 	handleEvents() {
 		doc.querySelector('.choice-screen .btn.join').addEventListener(
 				'click',this.onJoinChoice.bind(this));
 		doc.querySelector('.choice-screen .btn.create').addEventListener(
 				'click', this.onCreateChoice.bind(this));
-		doc.querySelector('.join-screen .btn').addEventListener(
+		doc.querySelector('.join-screen .join-btn').addEventListener(
 				'click',this.onTokenSend.bind(this));
 	}
 
@@ -28,16 +30,16 @@ export class Lobby {
 		_io.on('game:player-connected', this.onPlayerConnected.bind(this));
 		_io.on('game:token-created', this.onTokenCreated.bind(this));
 		_io.on('game:error', this.onGameError.bind(this));
-		_io.on('game:error', this.onGameError.bind(this));
 	}
 
-	onPlayerConnected(/*data*/) {
+	onPlayerConnected() {
 		this._socketReady = true;
 	}
 
 	onJoinChoice() {
 		if (this._socketReady) {
 			doc.querySelector('.join-screen').classList.add('onscreen');
+			doc.querySelector('.choice-screen').classList.add('hidden');
 			sessionStorage.setItem('player', 'right');
 		}
 	}
@@ -45,6 +47,7 @@ export class Lobby {
 	onCreateChoice() {
 		if (this._socketReady) {
 			sessionStorage.setItem('player', 'left');
+			doc.querySelector('.choice-screen').classList.add('hidden');
 			var sendCanvas = {
 				height : window.innerHeight,
 				width : window.innerWidth

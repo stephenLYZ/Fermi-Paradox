@@ -40,9 +40,9 @@ export class Actor {
       this.coords.x = this.coords.y;
 
       if (this.pitch === 'left'){
-        this.coords.y = 10;
+        this.coords.y = 70;
       } else {
-        this.coords.y =  this.maxValueX;
+        this.coords.y =  this.maxValueX - 70;
       }
       if (this.width < this.height) {
         this.height = this._width;
@@ -53,9 +53,9 @@ export class Actor {
 
       this.coords.y = this.coords.x;
       if (this.pitch === 'left'){
-        this.coords.x = 10;
+        this.coords.x = 70;
       } else {
-        this.coords.x =  this.maxValueY;
+        this.coords.x =  this.maxValueY - 70;
       }
       if (this.width > this.height) {
         this.height = this._width;
@@ -66,11 +66,27 @@ export class Actor {
   }
 
   draw() {
-    this.cx.save();
-    this.cx.beginPath();
-    this.cx.fillStyle = this.fillStyle;
-    this.el = this.cx.fillRect(this.coords.x, this.coords.y, this.width, this.height);
-    this.cx.closePath();
-    this.cx.restore();
+    if (this.pitch === 'right'){
+      this.cx.save();
+      this.cx.beginPath();
+      this.cx.fillStyle = "#ffff00";
+      this.el = this.cx.fillRect(this.coords.x, this.coords.y, this.width, this.height);
+      var img = new Image();
+      img.src = "../images/guy.png";
+      this.cx.drawImage(img,this.coords.x, this.coords.y ,90,80);
+      this.cx.closePath();
+      this.cx.restore();
+    }else{
+      this.cx.save();
+      this.cx.beginPath();
+      this.cx.fillStyle = "#ffff00";
+      this.el = this.cx.fillRect(this.coords.x, this.coords.y, this.width, this.height);
+      var img = new Image();
+      img.src = "../images/guy-rotate.png";
+      this.cx.drawImage(img,this.coords.x, this.coords.y - 70 ,90,80);
+      this.cx.closePath();
+      this.cx.restore();
+    }
+
   }
 }

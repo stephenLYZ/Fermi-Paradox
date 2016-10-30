@@ -8,7 +8,16 @@ body{
   height: 100%;
   overflow: hidden;
 }
-
+.background{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background:  url(../images/background.png) no-repeat;
+  background-size: 100%;
+  z-index: -1;
+}
 .notifier {
   position: absolute;
   top: 0;
@@ -32,16 +41,6 @@ body{
   }
 }
 
-#forkme {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: block;
-  z-index: 99999;
-  img {
-    width: 100px;
-  }
-}
 
 #score{
   position: fixed;
@@ -64,7 +63,7 @@ body{
   }
 
   &.portrait {
-    bottom: 10px;
+    bottom: 60px;
     top: auto;
 
     &.right {
@@ -74,9 +73,6 @@ body{
   }
 }
 
-canvas{
-  background: #FCFDC8;
-}
 
 .lobby {
   position: absolute;
@@ -84,7 +80,7 @@ canvas{
   right: 0;
   bottom: 0;
   left: 0;
-  background: #FCFDC8;
+  background: transparent;
   overflow: hidden;
   z-index: 10000;
 
@@ -107,44 +103,56 @@ canvas{
     .box {
       position: relative;
       margin: 0 auto;
-      width: 250px;
-      height: 150px;
-      top: 50%;
-      transform: translateY(-50%);
+      padding-top: 45%;
+      padding-bottom: 65%;
+      top: 12%;
+    }
+    .entry-box{
+      position: relative;
+      margin: 0 auto;
+      top: 12%;
+    }
+    .create-box{
+      background: url(../images/createScreen.png) no-repeat;
+      background-size: 100%;
+    }
+    .join-box{
+      background: url(../images/joinScreen.png) no-repeat;
+      background-size: 100%;
     }
   }
 
   .btn {
-    color: #000;
-    font-family: helvetica;
-    border: 2px solid #000;
-    border-radius: 3px;
-    padding: 20px 50px;
-    width: 250px;
-    box-sizing: border-box;
-    margin-bottom: 34px;
-    text-transform: uppercase;
-    font-weight: bold;
+    width: 320px;
+    padding: 100px 0;
+    margin: 0 auto;
+    margin-bottom: 10%;
 
-    &:hover{
-      color: #FCFDC8;
-      background: #000;
-    }
   }
-
+  .join{
+    background: url(../images/join.png) no-repeat;
+    background-size: 100%;
+  }
+  .create{
+    background: url(../images/create.png) no-repeat;
+    background-size: 100%;
+  }
   .token {
-    color: #000;
-    font-size: 39px;
+    color: #fdffce;
+    font-size: 25px;
     font-family: helvetica;
-    border-radius: 3px;
-    padding: 7px 30px;
-    width: 250px;
+    border-radius: 5px;
+    line-height: 44px;
+    width: 55%;
+    margin: 0 auto;
     box-sizing: border-box;
-    margin-bottom: 34px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 15px;
+    border: 1px solid rgba(0,0,0,0.3);
     text-transform: uppercase;
     text-align: center;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px #fff inset;
+    background-color: #9589c0;
   }
 
   .choice-screen {
@@ -152,21 +160,34 @@ canvas{
   }
   .join-screen {
 
-    .token {
+    .token-input {
+      color: #ea68a2;
+      background-color: #fdffce;
+
+
       &:focus {
-        border: 1px solid #000;
+        border: 1px solid #ea68a2;
         outline: none;
       }
     }
-
+    .join-btn{
+      position: absolute;
+      transform: translateY(24%);
+      width: 30px;
+      height: 35px;
+      right: 25%;
+      background: url(../images/input.png) no-repeat;
+      background-size: 100%;
+      animation: move 1s linear infinite;
+    }
   }
   .create-screen {
 
     span {
       display: inline-block;
       font-family: helvetica;
-      color: #000;
-      font-size: 20px;
+      color: #fdffce;
+      font-size: 14px;
       letter-spacing: 1px;
       animation: pulse 700ms alternate infinite;
     }
@@ -185,4 +206,162 @@ canvas{
   100% {
     opacity: 1;
   }
+}
+
+// stars
+.stars {
+			position: absolute;
+      right:40%;
+			width: 3px;
+			height:3px;
+			-webkit-border-radius:50%;
+			-moz-border-radius:50%;
+			border-radius:50%;
+			animation: fly 15s linear infinite;
+			transform-style: preserve-3d;
+      -webkit-filter: blur(2px);
+      -moz-filter: blur(2px);
+      -o-filter: blur(2px);
+      -ms-filter: blur(2px);
+      filter: blur(2px)
+}
+
+.stars:before, .stars:after {
+			content: "";
+			position: absolute;
+			width: inherit;
+			height: inherit;
+			box-shadow: inherit;
+      border-radius: 50%;
+}
+.stars:before {
+			transform: translateZ(-300px);
+			opacity: .6;
+}
+
+@keyframes fly{
+  from{
+    transform: translateY(-100px);
+    opacity: 1;
+  }
+  to{
+    transform: translateY(500px);
+    opacity: 0.5;
+  }
+}
+@keyframes move{
+  0%{
+    right: 25%;
+  }
+  25%{
+    right: 24.5%;
+  }
+  50%{
+    right: 24%;
+  }
+  75%{
+    right: 24.5%;
+  }
+  100%{
+    right: 25%;
+  }
+}
+
+// lose
+
+.lose{
+  position:absolute;
+  background: url(../images/lose.png) no-repeat;
+  background-size: 100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+}
+.arrow{
+  background: url(../images/arrow.png) no-repeat;
+  background-size: 100%;
+  position:absolute;
+  top: 50%;
+  text-align: center;
+  transform: translateY(-50%);
+  animation: scale 2s linear infinite;
+}
+.content{
+    font-size: 20px;
+    padding: 50px;
+    line-height: 30px;
+    color:#fdffce;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.cancel{
+  background: url(../images/cancel.png) no-repeat;
+  background-size: 100%;
+  position: absolute;
+  bottom: 50px;
+  right: 50%;
+  width: 50px;
+  height: 80px;
+  transform: translateX(50%);
+  animation: translate 2s linear infinite;
+}
+@keyframes translate {
+  0%{
+    bottom:50px;
+  }
+  25%{
+    bottom:53px;
+  }
+  50%{
+    bottom: 55px;
+  }
+  75%{
+    bottom:53px;
+  }
+  100%{
+    bottom:50px;
+  }
+}
+@keyframes scale {
+  0%{
+    background-position: 100%;
+    background-position: center center;
+  }
+  25%{
+    background-position: 90%;
+    background-position: center center;
+  }
+  50%{
+    background-size: 80%;
+    background-position: center center;
+  }
+  75%{
+    background-position: 90%;
+    background-position: center center;
+  }
+  100%{
+    background-position: 100%;
+    background-position: center center;
+  }
+}
+
+// win
+.win{
+  position:absolute;
+  background: url(../images/background.png) no-repeat;
+  background-size: 100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+}
+.mirror{
+    background: url(../images/camera.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 50% 0;
+    width: 80%;
+    margin: 55px auto;
+}
+.win-content{
+  top: 72%;
 }

@@ -19,10 +19,19 @@ export class Ball {
   draw() {
     //check if ball is on the pitch
     if (!this.invisible) {
+      // this.cx.save();
+      // var img = new Image();
+      // this.cx.drawImage(img,this.x, this.y,55,65);
+      // img.src = "../images/ball.png" ;
+      // this.cx.restore();
       this.cx.save();
       this.cx.beginPath();
       this.cx.fillStyle = this.fillStyle;
       this.cx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+      // var img = new Image();
+      // img.src = "../images/ball.png" ;
+      // this.cx.drawImage(img,this.x, this.y,55,65);
+      // this.radius = 10;
       this.cx.fill();
       this.cx.closePath();
       this.cx.restore();

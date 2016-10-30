@@ -1,6 +1,12 @@
 {
   "name": "pong",
   "version": "1.0.0",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node bin/www",
+    "test": "gulp test",
+    "postinstall": "gulp production"
+  },
   "dependencies": {
     "express": "^4.8.3",
     "handlebars": "^2.0.0",
@@ -12,11 +18,5 @@
   },
   "engines": {
     "node": "0.10.x"
-  },
-  "scripts": {
-    "prestart": "npm install",
-    "start": "node bin/www",
-    "test": "gulp test",
-    "postinstall": "gulp production"
   }
 }
